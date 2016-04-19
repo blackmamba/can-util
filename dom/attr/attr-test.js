@@ -1,14 +1,12 @@
-var domAttr = require('can-util/dom/attr/');
-var domEvents = require('can-util/dom/events/');
-
-
-QUnit = require('steal-qunit');
+var domAttr = require('./attr');
+var domEvents = require('../events/events');
+var doc = require('../document/document')();
 
 QUnit.module("can-util/dom/attr");
 
 test("attributes event", function () {
 
-	var div = document.createElement("div");
+	var div = doc.createElement("div");
 
 	var attrHandler1 = function(ev) {
 		equal(ev.attributeName, "foo", "attribute name is correct");
@@ -46,10 +44,10 @@ test("attributes event", function () {
 
 test("attr.set CHECKED attribute works", function(){
 
-	var input = document.createElement("input");
+	var input = doc.createElement("input");
 	input.type = "checkbox";
 
-	document.getElementById("qunit-fixture").appendChild(input);
+	doc.getElementById("qunit-fixture").appendChild(input);
 
 	domAttr.set(input, "CHECKED");
 	equal(input.checked, true);
@@ -59,15 +57,15 @@ test("attr.set CHECKED attribute works", function(){
 	domAttr.set(input, "CHECKED");
 
 	equal(input.checked, true);
-	document.getElementById("qunit-fixture").removeChild(input);
+	doc.getElementById("qunit-fixture").removeChild(input);
 });
 
 
 test("Map special attributes", function () {
 
-	var div = document.createElement("label");
+	var div = doc.createElement("label");
 
-	document.getElementById("qunit-fixture").appendChild(div);
+	doc.getElementById("qunit-fixture").appendChild(div);
 
 	domAttr.set(div, "for", "my-for");
 	equal(div.htmlFor, "my-for", "Map for to htmlFor");
@@ -83,12 +81,12 @@ test("Map special attributes", function () {
 	domAttr.set(div, "readonly");
 	equal(div.readOnly, true, "Map readonly to readOnly");
 
-	document.getElementById("qunit-fixture").removeChild(div);
+	doc.getElementById("qunit-fixture").removeChild(div);
 });
 
 test('set class attribute via className or setAttribute for svg (#2015)', function() {
-	var div = document.createElement('div');
-	var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+	var div = doc.createElement('div');
+	var svg = doc.createElementNS('http://www.w3.org/2000/svg', 'svg');
 	var obj = { toString: function() { return 'my-class'; } };
 
 	domAttr.set(div, 'class', 'my-class');

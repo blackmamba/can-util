@@ -1,4 +1,4 @@
-var getDocument = require("../../document/");
+var getDocument = require("../../document/document");
 var domData = require("../../data/");
 module.exports = {
 	add: function(handler){

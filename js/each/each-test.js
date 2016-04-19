@@ -5,7 +5,7 @@ QUnit.module('can-util/js/each');
 
 // The following test is from jQuery’s solution to this bug:
 // https://github.com/jquery/jquery/pull/2185
-test('iOS 8 64-bit JIT object length bug', function () {
+QUnit.test('iOS 8 64-bit JIT object length bug', function () {
 	expect(4);
 
 	var i;
@@ -20,7 +20,7 @@ test('iOS 8 64-bit JIT object length bug', function () {
 	equal(i, 3, 'Last index should be the length of the array');
 });
 
-test('#1989 - isArrayLike needs to check for object type', function() {
+QUnit.test('#1989 - isArrayLike needs to check for object type', function() {
   try {
     each(true, function(index) { });
     ok(true, 'each on true worked');

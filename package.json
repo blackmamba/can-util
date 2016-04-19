@@ -55,6 +55,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "can-simple-dom": "^0.3.0",
     "cssify": "^0.6.0",
     "documentjs": "^0.4.2",
     "done-serve": "^0.1.0",

@@ -1,15 +1,15 @@
 // # can/util/attr.js
 // Central location for attribute changing to occur, used to trigger an
 // `attributes` event on elements. This enables the user to do (jQuery example): `$(el).bind("attributes", function(ev) { ... })` where `ev` contains `attributeName` and `oldValue`.
-var setImmediate = require("../../js/set-immediate/");
-var getDocument = require("../document/");
-var global = require("../../js/global/")();
-var isOfGlobalDocument = require("../is-of-global-document/");
-var isArray = require("../../js/is-array/");
-var setData = require("../data/");
-var domDispatch = require("../dispatch/dispatch");
+var setImmediate = require('../../js/set-immediate/set-immediate');
+var getDocument = require('../document/document');
+var global = require('../../js/global/global')();
+var isOfGlobalDocument = require('../is-of-global-document/is-of-global-document');
+var isArray = require('../../js/is-array/is-array');
+var setData = require('../data/data');
+var domDispatch = require('../dispatch/dispatch');
 
-require("../events/attributes/");
+require('../events/attributes/attributes');
 
 
 // Acts as a polyfill for setImmediate which only works in IE 10+. Needed to make
@@ -172,7 +172,7 @@ var formElements = {"input": true, "textarea": true, "select": true},
 		},
 		setAttribute: (function(){
 			var doc = getDocument();
-			if(doc && document.createAttribute) {
+			if(doc && doc.createAttribute) {
 				try {
 					doc.createAttribute("{}");
 				} catch(e) {
@@ -263,7 +263,8 @@ var formElements = {"input": true, "textarea": true, "select": true},
 		// Checks if an element contains an attribute.
 		// For browsers that support `hasAttribute`, creates a function that calls hasAttribute, otherwise creates a function that uses `getAttribute` to check that the attribute is not null.
 		has: (function () {
-			var el = getDocument() && document.createElement('div');
+			var doc = getDocument();
+			var el = doc && doc.createElement('div');
 			if (el && el.hasAttribute) {
 				return function (el, name) {
 					return el.hasAttribute(name);
